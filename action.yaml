@@ -48,7 +48,6 @@ runs:
         always() &&
         inputs.post_results == 'true' &&
         inputs.action_type == 'plan'
-      shell: bash
       uses: peter-evans/find-comment@v2
       id: fc
       with:
@@ -60,7 +59,6 @@ runs:
         always() &&
         inputs.post_results == 'true' &&
         inputs.action_type == 'plan' &&
-      shell: bash
       uses: actions/github-script@v6.3.3
       with:
         script: |
