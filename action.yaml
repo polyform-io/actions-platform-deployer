@@ -23,6 +23,7 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v2
     - name: 'Apply ${{ inputs.target_environment }}'
       if: |
         always() &&
