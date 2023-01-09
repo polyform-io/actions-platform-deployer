@@ -3,8 +3,8 @@ description: |
   deploy polyform environemnts with terraform & terragrunt with formatted plan posted as color coded comments on a PR
 author: polyform-io
 inputs:
-  type:
-    description: "Boolean weather or not to apply infrastructure chaanges"
+  action_type:
+    description: "Terrform action to be taken allowed values are ( plan, apply )"
     required: true
   target_environment:
     description: "The name of the target environment under environment-stack dir"
@@ -18,7 +18,18 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: 'Run ${{ inputs.target_environment }}'
+    - name: 'Apply ${{ inputs.target_environment }}'
+      if: |
+        always() &&
+        inputs.action_type == 'apply' 
+      shell: bash
+      working-directory: '${{ inputs.environment_stack_dir }}/${{ inputs.target_environment }}'
+      run: "terragrunt run-all apply --terragrunt-non-interactive --terragrunt-include-external-dependencies -compact-warnings"
+      id: apply
+    - name: 'Plan ${{ inputs.target_environment }}'
+      if: |
+        always() &&
+        inputs.action_type == 'plan' 
       shell: bash
       working-directory: '${{ inputs.environment_stack_dir }}/${{ inputs.target_environment }}'
       run: |
@@ -36,6 +47,7 @@ runs:
       if: |
         always() &&
         inputs.post_results == 'true' &&
+        inputs.action_type == 'plan'
       shell: bash
       uses: peter-evans/find-comment@v2
       id: fc
@@ -47,6 +59,7 @@ runs:
       if: |
         always() &&
         inputs.post_results == 'true' &&
+        inputs.action_type == 'plan' &&
       shell: bash
       uses: actions/github-script@v6.3.3
       with:
