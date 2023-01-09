@@ -13,6 +13,11 @@ inputs:
     description: "The path from base directory of the repo to the target_environemnt directory"
     required: false
     default: "environment-stack"
+  post_results:
+    description: "Weather or not to post plan results of plan to Pull requests"
+    required: false
+    default: "true"
+
 
 
 runs:
