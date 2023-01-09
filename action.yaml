@@ -63,8 +63,8 @@ runs:
       with:
         script: |
           const fs = require('fs');
-          const shouldNotPost = fs.readFileSync("${{ inputs.environment)stack_dir }}/${{ inputs.target_environment }}/plan-short").toString().trim() === ''
-          const plan = ("${{ steps.plan.outcome }}" === "success") ? fs.readFileSync("${{ inputs.environment)stack_dir }}/${{ inputs.target_environment }}/plan-short") : fs.readFileSync("${{ inputs.environment)stack_dir }}/${{ inputs.target_environment }}/plan");
+          const shouldNotPost = fs.readFileSync("${{ inputs.environment_stack_dir }}/${{ inputs.target_environment }}/plan-short").toString().trim() === ''
+          const plan = ("${{ steps.plan.outcome }}" === "success") ? fs.readFileSync("${{ inputs.environment_stack_dir }}/${{ inputs.target_environment }}/plan-short") : fs.readFileSync("${{ inputs.environment_stack_dir }}/${{ inputs.target_environment }}/plan");
           let output = `Plan results for **\'${{ inputs.target_environment }}\'** environment:
           #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
 
