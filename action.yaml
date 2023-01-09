@@ -58,7 +58,7 @@ runs:
       if: |
         always() &&
         inputs.post_results == 'true' &&
-        inputs.action_type == 'plan' &&
+        inputs.action_type == 'plan'
       uses: actions/github-script@v6.3.3
       with:
         script: |
