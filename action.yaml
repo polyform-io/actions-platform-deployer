@@ -1,4 +1,4 @@
-name: 
+name: Polyform provisioner
 description: |
   deploy polyform environemnts with terraform & terragrunt with formatted plan posted as color coded comments on a PR
 author: polyform-io
