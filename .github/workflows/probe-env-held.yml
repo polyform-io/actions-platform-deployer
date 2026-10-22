@@ -1,0 +1,13 @@
+name: Probe env held
+
+on:
+  push:
+    branches: ['probe/**']
+
+jobs:
+  held:
+    name: Held by a required reviewer
+    runs-on: piston-2cpu-ubuntu-2402
+    environment: needs-approval
+    steps:
+      - run: echo "job released by an approval"
